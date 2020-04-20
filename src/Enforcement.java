@@ -23,13 +23,12 @@ public class Enforcement {
                 FryPowder fryPowderElements = (FryPowder) elements;
                 totalMoney += fryPowderElements.payment();
                 totalPowderMoney += fryPowderElements.payment();
-                System.out.println(daysRemaining(elements));
-                int flagcheck = daysRemaining(elements)+1;
-                if(flagcheck>120){
+                int flagCheck = daysRemaining(elements)+1;
+                if(isMoreThanAmountOfDays(flagCheck, 120)){
                     totalDiscountMoney += (fryPowderElements.totalDiscount(5));
-                }else if(flagcheck>60){
+                }else if(isMoreThanAmountOfDays(flagCheck, 60)){
                     totalDiscountMoney += (fryPowderElements.totalDiscount(20));
-                }else if(flagcheck>0){
+                }else if(isMoreThanAmountOfDays(flagCheck, 0)){
                     totalDiscountMoney += (fryPowderElements.totalDiscount(40));
                 }else {
                     totalDiscountMoney += (fryPowderElements.totalDiscount(100));
@@ -39,12 +38,12 @@ public class Enforcement {
                 totalMoney += meatElements.payment();
                 totalMeatMoney += meatElements.payment();
                 System.out.println(daysRemaining(elements));
-                int flag = daysRemaining(elements)-15;
-                if(flag>05){
+                int flagCheck = daysRemaining(elements)-15;
+                if(isMoreThanAmountOfDays(flagCheck, 05)){
                     totalDiscountMoney += (meatElements.totalDiscount(5));
-                }else if(flag>03){
+                }else if(isMoreThanAmountOfDays(flagCheck, 03)){
                     totalDiscountMoney += (meatElements.totalDiscount(20));
-                }else if(flag>0){
+                }else if(isMoreThanAmountOfDays(flagCheck, 0)){
                     totalDiscountMoney += (meatElements.totalDiscount(40));
                 }else {
                     totalDiscountMoney += (meatElements.totalDiscount(100));
@@ -57,10 +56,15 @@ public class Enforcement {
         System.out.printf("Include FryPowder: %10.2f vnd \n", totalPowderMoney);
         System.out.printf("Include Meat: %10.2f vnd\n", totalMeatMoney);
         System.out.printf("Total money got Discount: %10.2f vnd\n", totalDiscountMoney);
-        showDate(MaterialList[2].getManufactorDate());
+
 
 
     }
+
+    private static boolean isMoreThanAmountOfDays(int flagcheck, int i) {
+        return flagcheck > i;
+    }
+
     public static int daysRemaining(Material material){
         Calendar today = Calendar.getInstance();
         Calendar expDate = material.expiredDate();
@@ -73,4 +77,5 @@ public class Enforcement {
         System.out.print((date.get(Calendar.MONTH)+1) + " ");
         System.out.println(date.get(Calendar.YEAR));
     }
+
 }
