@@ -1,11 +1,12 @@
 import java.util.Calendar;
 
 public class FryPowder extends Material implements Discount {
-    public FryPowder(String id,String name, int quantity, int cost){
+    public FryPowder(String id,String name, int quantity, int cost,int date, int month, int year){
         this.setId(id);
         this.setName(name);
         this.setQuantity(quantity);
         this.setCost(cost);
+        this.setManufactorDate(year,month,date);
 
     }
 
@@ -16,9 +17,9 @@ public class FryPowder extends Material implements Discount {
 
     @Override
     public Calendar expiredDate() {
-        Calendar expDate = super.getManufactorDate();
+        Calendar expDate = this.getManufactorDate();
         expDate.add(Calendar.YEAR,1);
-        return null;
+        return expDate;
     }
 
     @Override

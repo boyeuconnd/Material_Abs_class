@@ -2,14 +2,17 @@ import java.util.Calendar;
 
 public abstract class Material {
     private String id,name;
-    private Calendar manufactorDate;
+    private Calendar manufactorDate = Calendar.getInstance();
     private int quantity,cost;
     public Calendar getManufactorDate() {
         return manufactorDate;
     }
 
     public Calendar setManufactorDate(int year, int month, int date) {
-        this.manufactorDate.set(year,month,date);
+//        if (month == 12){
+//            month =0;
+//        }
+        this.manufactorDate.set(year,(month-1),date);
         return manufactorDate;
     }
 
